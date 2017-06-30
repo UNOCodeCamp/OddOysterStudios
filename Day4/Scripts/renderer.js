@@ -4,16 +4,12 @@ renderer = new Object();
 renderer.canvas = document.getElementById("viewport");
 renderer.ctx = renderer.canvas.getContext("2d");
 
-renderer.start = function()
-{
-	renderer.canvas.style = "cursor: none;"
-}
-
 renderer.draw = function()
 {
+	renderer.ctx.clearRect(0,0,viewport.width,viewport.height);
 	//Draw game
 	scene.draw(); 
-	enemy.draw();
 	player.draw();
-	hud.draw();
+	player2.draw();
+	
 };
