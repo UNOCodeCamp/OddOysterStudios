@@ -1,0 +1,28 @@
+.jumbo-text {
+	color: #0275d8!important;
+	font-weight: 200;
+}
+
+.games {
+	font-family: "Helvetica", Sans-serif;
+}
+
+.jumbotron {
+	background-color: #eceeef;
+}
+
+body {
+	background-color: #0275d8;
+}
+
+h2 {
+	margin-top: 20px;
+	color: white;
+	padding-bottom: 20px;
+	font-family: "Helvetica", Sans-serif;
+}
+
+img {
+	height: 33%;
+	width: 50%;
+}
