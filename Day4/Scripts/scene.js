@@ -14,8 +14,8 @@ function Scene()
      this.blocks.forEach( (block) => block.draw() );
      this.hazards.forEach( (hazard) => hazard.draw() );
      exit.draw();
-    };
-  }
+    }
+  };
   
   this.setScene = function(worldData)
   {
@@ -36,6 +36,52 @@ function Scene()
           var w = 32;
           var h = 32;
           var block = new Block(x,y,w,h);
+          this.blocks.push(block);
+        }
+        
+        else if (tileID == '~')
+        {
+          var x = i*32;
+          var y = j*32;
+          var w = 32;
+          var h = 32;
+          var block = new Dirt(x,y,w,h);
+          this.blocks.push(block);
+        }
+        else if (tileID == '+')
+        {
+          var x = i*32;
+          var y = j*32;
+          var w = 800;
+          var h = 300;
+          var block = new Sky(x,y,w,h);
+          this.blocks.push(block);
+        }
+        else if (tileID == 'T')
+        {
+          var x = i*32;
+          var y = j*32;
+          var w = 32;
+          var h = 32;
+          var block = new Logo(x,y,w,h);
+          this.blocks.push(block);
+        }
+        else if (tileID == 'O')
+        {
+          var x = i*32;
+          var y = j*32;
+          var w = 32;
+          var h = 32;
+          var block = new Sand(x,y,w,h);
+          this.blocks.push(block);
+        }
+        if (tileID == 'D')
+        {
+          var x = i*32;
+          var y = j*32;
+          var w = 32;
+          var h = 32;
+          var block = new Lava(x,y,w,h);
           this.blocks.push(block);
         }
         else if (tileID  == '@')
@@ -67,6 +113,8 @@ function Scene()
           hazard.x = i*32
           hazard.y = j*32
           this.hazards.push(hazard)
+          
+          
         }
         
       }

@@ -18,17 +18,26 @@ player2.isJumping = false;
 
 
 player2.poses = {};
-player2.poses['right'] = new Animation(["Assets/WalkRight1 (1).png","Assets/WalkRight2.png","Assets/WalkRight3.png" ]);    
-player2.poses['left'] = new Animation(["Assets/WalkLeft1.png","Assets/Walkleft2.png","Assets/WalkLeft3.png" ]);
-player2.poses['front'] = new Animation(["Assets/Walk1.png","Assets/Walk2.png","Assets/Walk3.png" ]);
-player2.currentPose = 'left';
+player2.poses['right'] = new Animation(["Assets/2Right1.png","Assets/2Right2.png","Assets/2Right3.png" ]);    
+player2.poses['left'] = new Animation(["Assets/2Left1.png","Assets/2Left2.png","Assets/2Left3.png" ]);
+player2.poses['front'] = new Animation(["Assets/2Still1.png","Assets/2Still2.png","Assets/2Still3.png","Assets/2Still4.png"]);
+player2.poses['jump'] = new Animation(["Assets/2Jump1.png","Assets/2Jump2.png","Assets/2Jump3.png"]);
+player2.poses['still'] = new Animation(["Assets/2Still1.png","Assets/2Still2.png","Assets/2Left3.png"])
+player2.currentPose = 'right';
 
 
 player2.draw = function()
 {
-    var sprite = player.poses[player.currentPose]
+     if (input.keysDown.size == 0)
+    {
+         player2.currentPose = "still"
+       
+    }
+    var sprite = player2.poses[player2.currentPose]
+       player2.image = sprite.getImage(); 
     renderer.ctx.drawImage( player2.image, player2.x, player2.y, player2.width, player2.height ); 
 };
+
 
 player2.isTouching = function( gameObject )
 { 
@@ -46,19 +55,22 @@ player2.move = function(x, y)
     if (input.keysDown.has(37) && player2.velX > -player2.speed) 
     { 
         player2.velX--; 
+        player2.currentPose = 'left'
     }
     // player2 holding right
     if (input.keysDown.has(39) && player2.velX < player2.speed) 
     { 
         player2.velX++;
+        player2.currentPose = 'right'
     }
     player2.velX *= friction;
 
     /*Jumping*/
-    if ( (input.keysDown.has(38) || input.keysDown.has(32) ) && !player2.isJumping) 
+    if ( (input.keysDown.has(38)  ) && !player2.isJumping) 
     { 
         player2.isJumping = true;
         player2.velY = -player2.speed*2;
+        player2.currentPose = "jump";
     }
 
     //Apply terminal velocity

@@ -11,9 +11,16 @@ game.start = function()
     var level = maps[game.level]
     scene.setScene(level);
     
+    
+    
     game.startTime = Date.now();
     input.start();
     game.main();
+    
+   // var audio = new Audio("Assets/Map.wav")
+     //audio.loop = true
+     //audio.play();
+
 };
 
 // The main game loop
@@ -23,8 +30,13 @@ game.main = function()
     {
         game.update();
         renderer.draw();
-        window.requestAnimationFrame(game.main);
+        
     }
+    else
+    {
+        hud.drawGameOver()
+    }
+    window.requestAnimationFrame(game.main);
 
 };
 
@@ -66,9 +78,11 @@ game.update = function()
     for ( i in scene.hazards)
     {
                  var hazard = scene.hazards[i];
-        if ( hazard.isTouching(player) ) or
-        if ( hazard.isTouching(player2) )
+        if ( hazard.isTouching(player) || hazard.isTouching(player2) )
         {
+            var audio = new Audio("Assets/sfx_deathscream_alien6.wav")
+            audio.play()
+
             game.isOver = true;
         }
             }

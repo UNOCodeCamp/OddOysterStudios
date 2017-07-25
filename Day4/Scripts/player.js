@@ -20,14 +20,18 @@ player.poses = {};
 player.poses['right'] = new Animation(["Assets/WalkRight1 (1).png","Assets/WalkRight2.png","Assets/WalkRight3.png" ]);    
 player.poses['left'] = new Animation(["Assets/WalkLeft1.png","Assets/Walkleft2.png","Assets/WalkLeft3.png" ]);
 player.poses['front'] = new Animation(["Assets/Walk1.png","Assets/Walk2.png","Assets/Walk3.png" ]);
-player.currentPose = 'left';
+player.poses['jump'] = new Animation(["Assets/Jump1.png","Assets/Jump2.png","Assets/Jump3.png"]);
+player.poses['still'] = new Animation(["Assets/Still1.png","Assets/Still2.png"])
+player.currentPose = 'still';
 player.draw = function()
 {
-    if (input.keysDown.size > 0)
+    if (input.keysDown.size == 0)
     {
-       var sprite = player.poses[player.currentPose]
-       player.image = sprite.getImage(); 
+         player.currentPose = "still"
+       
     }
+    var sprite = player.poses[player.currentPose]
+       player.image = sprite.getImage(); 
     renderer.ctx.drawImage( player.image, player.x, player.y, player.width, player.height ); 
 };
 
@@ -59,11 +63,16 @@ player.move = function(x, y)
     player.velX *= friction;
 
     /*Jumping*/
-    if ( (input.keysDown.has(87) || input.keysDown.has(32) ) && !player.isJumping) 
+    if ( (input.keysDown.has(87)  ) && !player.isJumping) 
     { 
         player.isJumping = true;
         player.velY = -player.speed*2;
+        player.currentPose = "jump";
     }
+   /*Still*/
+   
+
+
 
     //Apply terminal velocity
     if (player.velY < TERMINAL)
